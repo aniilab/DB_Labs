@@ -1,0 +1,228 @@
+﻿@model Query
+
+@{
+    ViewData["Title"] = "Результат";
+}
+
+<h1>Результат</h1>
+<hr />
+
+@if (string.IsNullOrEmpty(Model.Error))
+{
+    if (Model.QueryId.Equals("S1"))
+    {
+        <p style="font-size:20px">
+            <b>Назви усіх фільмів, в яких знімається актор з ім'ям @Model.ActorName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.MoviesNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.MoviesNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S2"))
+    {
+        <p style="font-size:20px">
+            <b>Назви усіх фільмів та їх роки випуску жанру @Model.GenreName, рік випуску яких більше @Model.MovieYear</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                    <th>
+                        Рік випуску
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.MoviesNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.MoviesNames[i]
+                        </td>
+                        <td>
+                            @Model.MoviesYears[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+     else if (Model.QueryId.Equals("S3"))
+    {
+        <p style="font-size:20px">
+            <b>Назви усіх фільмів, у яких кількість жанрів більша ніж @Model.CountOfGenres</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.MoviesNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.MoviesNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S4"))
+    {
+        <p style="font-size:20px">
+            <b>Імена усіх режисерів, що зняли фільми жанру @ViewBag.GenreName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я режисера
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.DirectorsNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.DirectorsNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+        else if (Model.QueryId.Equals("S5"))
+    {
+        <p style="font-size:20px">
+            <b>Назви усіх жанрів фільмів кінокомпанії @Model.ProductionName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва жанру
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.GenresNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.GenresNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+     else if (Model.QueryId.Equals("M1"))
+    {
+        <p style="font-size:20px">
+            <b>Фільми, які мають ТІ І ТІЛЬКИ ТІ жанри, що і фільм @ViewBag.MovieName.</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+               @for (int i = 0; i < Model.MoviesNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.MoviesNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+   else if (Model.QueryId.Equals("M2"))
+    {
+        <p style="font-size:20px">
+            <b>Назви фільмів, що мають ті ж жанри, що і фільм @Model.MovieName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.MoviesNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.MoviesNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    else if (Model.QueryId.Equals("M3"))
+    {
+        <p style="font-size:20px">
+            <b>Назви жанрів, до яких належать всі фільми за рейтингом вищі за @Model.Rating </b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.GenresNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.GenresNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p style="font-size:20px">
+        @Model.Error
+    </p>
+}
+<form method="get" asp-controller="Queries" asp-action="Index">
+    <input type="submit" class="btn btn-outline-secondary" value="Назад до запитів" />
+</form>

@@ -1,0 +1,64 @@
+﻿@model MovieBase.Movie
+
+@{
+    ViewData["Title"] = "Інформація про фільм";
+}
+
+<h1>Більше інформації про фільм</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProdYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProdYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImdbRate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImdbRate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Production)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.ActionLink(@Model.Production.Name, "Details", "Productions", routeValues: new {id = @Model.ProductionId})
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MoviesGenres)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(string.Join(", ", @Model.MoviesGenres.Select(x => x.Genre.Name).ToList()))
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DirectorMovies)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(string.Join(", ", @Model.DirectorMovies.Select(x => x.Director.Name).ToList()))
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ActorsInMovies)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(string.Join(", ", @Model.ActorsInMovies.Select(x => x.Actor.Name + " - " + x.Role).ToList()))
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Внести зміни</a> 
+</div>

@@ -4,7 +4,6 @@
 #include "Tools.h"
 #include "Interface.h"
 
-using namespace std;
 
 int main(int argc, const char* argv[]) {
     bool flag = 1;

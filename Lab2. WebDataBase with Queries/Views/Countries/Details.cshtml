@@ -1,0 +1,29 @@
+﻿@model MovieBase.Country
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Кіностудії, що знаходяться у країні @ViewBag.CountryName</h1>
+
+   <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Productions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model.Productions) {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", "Productions", routeValues: new {id = item.Id})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

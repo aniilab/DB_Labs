@@ -1,0 +1,214 @@
+﻿@model MovieBase.Models.Query
+@{
+    ViewData["Title"] = "Запити";
+}
+
+<h1>Запити</h1>
+<hr />
+
+<h3>Прості</h3>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 1</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви усіх фільмів, в яких знімається актор із заданим ім'ям.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        
+        <form asp-action="SimpleQuery1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MovieYear" value="2012" />
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <div class="form-group">
+                <label class="control-label">Ім'я актора</label>
+                <select asp-for="ActorName" asp-items="@ViewBag.ActorsList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+
+<p style="font-size:20px">
+    <b>Запит 2</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви усіх фільмів та їхні роки випуску заданого жанру, рік випуску яких більше заданого.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SimpleQuery2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <div class="form-group">
+                <label class="control-label">Назва жанру</label>
+                <select asp-for="GenreName" asp-items="@ViewBag.GenresList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieYear" class="control-label"></label>
+                <input asp-for="MovieYear" class="form-control" />
+                <span class="text-danger">@ViewBag.Error1</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<p style="font-size:20px">
+    <b>Запит 3</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви усіх фільмів, у яких кількість жанрів більша заданої.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        
+        <form asp-action="SimpleQuery3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MovieYear" value="2001" />
+
+            <div class="form-group">
+                <label class="control-label">Кількість жанрів</label>
+                <input asp-for="CountOfGenres" class="form-control" />
+                <span asp-validation-for="CountOfGenres" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.Error2</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 4</b>
+</p>
+
+<p style="font-size:17px">
+    Знайти імена усіх режисерів, що зняли фільми заданого жанру.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SimpleQuery4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <input type="hidden" asp-for="MovieYear" value="2001" />
+            <div class="form-group">
+                <label class="control-label">Назва жанру</label>
+                <select asp-for="GenreName" asp-items="@ViewBag.GenresList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 5</b>
+</p>
+<p style="font-size:17px">
+    Знайти усі жанри фільмів заданої кіностудії.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SimpleQuery5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <input type="hidden" asp-for="MovieYear" value="2001" />
+            <div class="form-group">
+                <label class="control-label">Назва кіностудії</label>
+                <select asp-for="ProductionName" asp-items="@ViewBag.ProductionsList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Завантажити результат у файл" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h3>Складні</h3>
+<hr />
+
+
+<p style="font-size:20px">
+    <b>Запит 1</b>
+</p>
+<p style="font-size:17px">
+    Знайти фільми, які мають ТІ І ТІЛЬКИ ТІ жанри, що і заданий фільм.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MultipleQuery1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <input type="hidden" asp-for="MovieYear" value="2001" />
+            <div class="form-group">
+                <label class="control-label">Назва фільму</label>
+                <select asp-for="MovieName" asp-items="@ViewBag.MoviesList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 2</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви фільмів, що мають ті ж жанри, що і заданий фільм, і можливо інші.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MultipleQuery2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <input type="hidden" asp-for="MovieYear" value="2001" />
+            <div class="form-group">
+                <label class="control-label">Назва фільму</label>
+                <select asp-for="MovieName" asp-items="@ViewBag.MoviesList" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 3</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви жанрів, до яких належать всі фільми, у яких рейтинг вище за заданий.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MultipleQuery3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CountOfGenres" value="1" />
+            <div class="form-group">
+                <label class="control-label">Рейтинг</label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.Error3</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Знайти" class="btn btn-outline-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
